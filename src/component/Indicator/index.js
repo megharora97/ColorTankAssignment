@@ -6,7 +6,7 @@ export default function Indicator({amount, filledAmount}) {
   return (
     <View style={styles.container}>
       <View style={styles.child(amount)}>
-        <Text style={styles.arrow}>▶</Text>
+        <Text style={styles.arrow(amount)}>▶</Text>
         <Text style={styles.text}>
           Current{'\n'}
           <Text style={styles.available(amount)}>{filledAmount} L</Text>
@@ -25,13 +25,14 @@ const styles = StyleSheet.create({
   },
   child: amount => ({
     flexDirection: 'row',
-    height: `${amount + 12}%`,
+    height: `${amount + 10}%`,
   }),
-  arrow: {
+  arrow: amount => ({
     transform: [{rotateY: '180deg'}],
-    marginTop: 32,
+    marginTop: 26,
     marginEnd: 6,
-  },
+    color: getColorByPercentage(amount),
+  }),
   text: {
     fontSize: 13,
     fontWeight: '700',
@@ -39,6 +40,6 @@ const styles = StyleSheet.create({
   },
   available: amount => ({
     color: getColorByPercentage(amount),
-    fontSize: 28,
+    fontSize: 26,
   }),
 });
