@@ -15,8 +15,8 @@ import ColorTank from './component/ColorTank';
 function App() {
   const [showTank, setShowTank] = useState(false);
 
-  const [amount, setAmount] = useState(1);
-  const [filled, setFilled] = useState(0.1);
+  const [amount, setAmount] = useState('1');
+  const [filled, setFilled] = useState('0.1');
 
   const goBack = () => {
     if (!showTank) {
@@ -24,9 +24,9 @@ function App() {
         Alert.alert('Tank size should be between 1 to 5 L');
         return;
       }
-      if(filled > amount) {
+      if (filled > amount) {
         Alert.alert('Filled amount cannot be greater than tank size');
-        return
+        return;
       }
     }
     setShowTank(!showTank);
@@ -39,11 +39,13 @@ function App() {
         <ColorTank size={amount} filled={filled} goBack={goBack} />
       ) : (
         <View style={styles.form}>
-          <Text style={styles.title}>{"Tank Size (b/w 1L to 5L)"}</Text>
+          <Text style={styles.title}>{'Tank Size (b/w 1L to 5L)'}</Text>
           <TextInput
             style={styles.input}
             placeholder="Enter tank size"
+            placeholderTextColor={'#c2c2c2'}
             maxLength={4}
+            value={amount}
             onChangeText={setAmount}
           />
           <Text style={{...styles.title, marginTop: 16}}>
@@ -52,7 +54,9 @@ function App() {
           <TextInput
             style={styles.input}
             onChangeText={setFilled}
+            placeholderTextColor={'#c2c2c2'}
             maxLength={4}
+            value={filled}
             placeholder="Enter the filled amount"
           />
           <Pressable style={styles.tankBtn} onPress={goBack}>
@@ -93,6 +97,7 @@ const styles = StyleSheet.create({
     borderColor: '#e2e2e2',
     padding: 12,
     marginTop: 4,
+    color: '#000',
   },
   title: {
     fontWeight: '500',
